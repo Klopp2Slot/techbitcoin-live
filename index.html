@@ -2,49 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="TechBitcoin - Live cryptocurrency market tracker for the top 1000 coins.">
-  <meta property="og:title" content="TechBitcoin - Live Crypto Tracker" />
-  <meta property="og:description" content="Track the top 1000 cryptocurrencies live with market caps, prices, gainers, and losers." />
-  <meta property="og:type" content="website" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechBitcoin - Live Crypto Tracker</title>
-  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <h1>TechBitcoin</h1>
     <nav>
-      <button onclick="switchTab('market')">Market</button>
-      <button onclick="switchTab('gainers')">Gainers</button>
-      <button onclick="switchTab('losers')">Losers</button>
+      <button onclick="showSection('market')">Market</button>
+      <button onclick="showSection('gainers')">Gainers</button>
+      <button onclick="showSection('losers')">Losers</button>
     </nav>
   </header>
 
   <main>
-    <section id="market" class="tab active">
-      <input type="text" id="search" placeholder="Search coins..." oninput="filterCoins()" />
-      <table id="coinTable"><thead><tr>
-        <th>#</th><th>Coin</th><th>Price</th><th>24h %</th><th>Market Cap</th>
-      </tr></thead><tbody id="coinBody">Loading coins...</tbody></table>
+    <section id="market" class="active">
+      <h2>Top 1000 Coins</h2>
+      <input type="text" id="search" placeholder="Search coins..." />
+      <table id="coin-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Coin</th><th>Price</th><th>24h %</th><th>Market Cap</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
 
-    <section id="gainers" class="tab">
-      <table><thead><tr>
-        <th>Coin</th><th>Price</th><th>24h %</th>
-      </tr></thead><tbody id="gainersBody">Loading...</tbody></table>
+    <section id="gainers">
+      <h2>Top Gainers (24h)</h2>
+      <ul id="gainers-list">Loading...</ul>
     </section>
 
-    <section id="losers" class="tab">
-      <table><thead><tr>
-        <th>Coin</th><th>Price</th><th>24h %</th>
-      </tr></thead><tbody id="losersBody">Loading...</tbody></table>
+    <section id="losers">
+      <h2>Top Losers (24h)</h2>
+      <ul id="losers-list">Loading...</ul>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 TechBitcoin. Learn it. Track it. Trust it.</p>
-  </footer>
-
-  <script src="js/script.js"></script>
+  <footer>&copy; 2025 TechBitcoin</footer>
+  <script src="script.js"></script>
 </body>
 </html>
