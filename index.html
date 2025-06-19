@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechBitcoin - Live Crypto Tracker</title>
+  <title>TechBitcoin - Live Market</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,31 +18,32 @@
   </header>
 
   <main>
-    <section id="market" class="active">
-      <h2>Top 1000 Coins</h2>
-      <input type="text" id="search" placeholder="Search coins..." />
-      <table id="coin-table">
+    <section id="market" class="visible">
+      <h2>Top 100 Coins</h2>
+      <input type="text" id="searchInput" placeholder="Search coins..." />
+      <table id="coinTable">
         <thead>
           <tr>
-            <th>#</th><th>Coin</th><th>Price</th><th>24h %</th><th>Market Cap</th>
+            <th>#</th><th>Coin</th><th>Price</th><th>1h %</th><th>24h %</th><th>7d %</th><th>Market Cap</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
-    <section id="gainers">
+    <section id="gainers" class="hidden">
       <h2>Top Gainers (24h)</h2>
-      <ul id="gainers-list">Loading...</ul>
+      <ul id="gainersList"></ul>
     </section>
 
-    <section id="losers">
+    <section id="losers" class="hidden">
       <h2>Top Losers (24h)</h2>
-      <ul id="losers-list">Loading...</ul>
+      <ul id="losersList"></ul>
     </section>
   </main>
 
   <footer>&copy; 2025 TechBitcoin</footer>
+
   <script src="script.js"></script>
 </body>
 </html>

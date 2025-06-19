@@ -1,60 +1,37 @@
 
+const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+
 document.addEventListener("DOMContentLoaded", () => {
-  const marketTableBody = document.querySelector("#coin-table tbody");
-  const gainersList = document.getElementById("gainers-list");
-  const losersList = document.getElementById("losers-list");
-  const searchInput = document.getElementById("search");
-
-  function showSection(id) {
-    document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-  }
-  window.showSection = showSection;
-
-  function loadMarketData() {
-    fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1")
-      .then(res => res.json())
-      .then(data => {
-        marketTableBody.innerHTML = "";
-        data.forEach((coin, i) => {
-          const row = `<tr>
-            <td>${i + 1}</td>
-            <td><img src="${coin.image}" alt="${coin.name}" width="20"> ${coin.name}</td>
-            <td>$${coin.current_price.toLocaleString()}</td>
-            <td style="color:${coin.price_change_percentage_24h >= 0 ? 'lime' : 'red'}">
-              ${coin.price_change_percentage_24h.toFixed(2)}%
-            </td>
-            <td>$${coin.market_cap.toLocaleString()}</td>
-          </tr>`;
-          marketTableBody.insertAdjacentHTML("beforeend", row);
-        });
-
-        searchInput.addEventListener("input", () => {
-          const search = searchInput.value.toLowerCase();
-          document.querySelectorAll("#coin-table tbody tr").forEach(row => {
-            row.style.display = row.textContent.toLowerCase().includes(search) ? "" : "none";
-          });
-        });
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#coinTable tbody");
+      data.forEach((coin, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${coin.name} (${coin.symbol.toUpperCase()})</td>
+          <td>$${coin.current_price.toLocaleString()}</td>
+          <td>${coin.price_change_percentage_1h_in_currency?.toFixed(2) ?? 'N/A'}%</td>
+          <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+          <td>${coin.price_change_percentage_7d_in_currency?.toFixed(2) ?? 'N/A'}%</td>
+          <td>$${coin.market_cap.toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
       });
-  }
+    });
 
-  function loadMovers(type, container) {
-    fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=percent_change_24h_desc&per_page=100&page=1")
-      .then(res => res.json())
-      .then(data => {
-        const sorted = [...data].sort((a, b) =>
-          type === "gainers" ? b.price_change_percentage_24h - a.price_change_percentage_24h :
-                               a.price_change_percentage_24h - b.price_change_percentage_24h
-        ).slice(0, 10);
-        container.innerHTML = "";
-        sorted.forEach(coin => {
-          const item = `<li>${coin.name}: ${coin.price_change_percentage_24h.toFixed(2)}%</li>`;
-          container.insertAdjacentHTML("beforeend", item);
-        });
-      });
-  }
-
-  loadMarketData();
-  loadMovers("gainers", gainersList);
-  loadMovers("losers", losersList);
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const value = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#coinTable tbody tr");
+    rows.forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(value) ? "" : "none";
+    });
+  });
 });
+
+function showSection(sectionId) {
+  document.querySelectorAll("main section").forEach(section => {
+    section.className = section.id === sectionId ? "visible" : "hidden";
+  });
+}
