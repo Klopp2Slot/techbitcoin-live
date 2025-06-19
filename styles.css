@@ -35,6 +35,16 @@ th, td {
   text-align: left;
   border-bottom: 1px solid #444;
 }
+img {
+  width: 24px;
+  height: 24px;
+}
+.green {
+  color: #00ff99;
+}
+.red {
+  color: #ff4c4c;
+}
 input[type="text"] {
   width: 100%;
   padding: 8px;
