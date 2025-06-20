@@ -1,1 +1,45 @@
-body { font-family: Arial, sans-serif; background-color: #111; color: #eee; }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #eee;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #0f0;
+}
+
+#crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+  display: none;
+}
+
+#crypto-table th,
+#crypto-table td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: left;
+}
+
+#crypto-table th {
+  background-color: #222;
+  color: #0ff;
+}
+
+#crypto-table td img {
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+#loader {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.2em;
+  color: #ccc;
+}
