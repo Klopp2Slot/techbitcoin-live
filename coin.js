@@ -13,6 +13,7 @@ async function loadCoinDetails() {
     <p>Market Cap: $${data.market_data.market_cap.usd.toLocaleString()}</p>
     <p>24h High: $${data.market_data.high_24h.usd}</p>
     <p>24h Low: $${data.market_data.low_24h.usd}</p>
+    <p><strong>All-Time High:</strong> $${data.market_data.ath.usd} on ${new Date(data.market_data.ath_date.usd).toLocaleDateString()}</p>
   `;
 
   const prices = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`);
@@ -27,16 +28,19 @@ async function loadCoinDetails() {
     data: {
       labels: labels,
       datasets: [{
-        label: 'Price (USD)',
+        label: '7-Day Price (USD)',
         data: dataPoints,
         borderColor: 'blue',
-        backgroundColor: 'lightblue',
+        backgroundColor: 'rgba(135,206,250,0.4)',
         fill: true,
         tension: 0.3
       }]
     },
     options: {
       responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
       scales: {
         x: { display: true },
         y: { display: true }
