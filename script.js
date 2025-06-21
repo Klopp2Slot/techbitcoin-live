@@ -14,6 +14,8 @@ async function fetchCryptoData(page = 1) {
 
   data.forEach((coin, index) => {
     const row = document.createElement("tr");
+    row.style.cursor = "pointer";
+    row.onclick = () => window.location.href = `coin.html?id=${coin.id}`;
 
     const formatChange = (value) => {
       if (value === null || value === undefined) return "N/A";
