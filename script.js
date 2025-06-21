@@ -16,17 +16,18 @@ async function fetchCryptoData(page = 1) {
     const row = document.createElement("tr");
 
     const formatChange = (value) => {
+      if (value === null || value === undefined) return "N/A";
       const cls = value >= 0 ? "green" : "red";
-      return `<span class="\${cls}">\${value?.toFixed(2) ?? "N/A"}%</span>`;
+      return `<span class="${cls}">${value.toFixed(2)}%</span>`;
     };
 
     row.innerHTML = `
-      <td>\${(page - 1) * perPage + index + 1}</td>
-      <td><img src="\${coin.image}" alt="\${coin.name}" /> \${coin.name} (\${coin.symbol.toUpperCase()})</td>
-      <td>\$ \${coin.current_price.toLocaleString()}</td>
-      <td>\${formatChange(coin.price_change_percentage_1h_in_currency)}</td>
-      <td>\${formatChange(coin.price_change_percentage_24h_in_currency)}</td>
-      <td>\${formatChange(coin.price_change_percentage_7d_in_currency)}</td>
+      <td>${(page - 1) * perPage + index + 1}</td>
+      <td><img src="${coin.image}" alt="${coin.name}" /> ${coin.name} (${coin.symbol.toUpperCase()})</td>
+      <td>$${coin.current_price.toLocaleString()}</td>
+      <td>${formatChange(coin.price_change_percentage_1h_in_currency)}</td>
+      <td>${formatChange(coin.price_change_percentage_24h_in_currency)}</td>
+      <td>${formatChange(coin.price_change_percentage_7d_in_currency)}</td>
     `;
 
     tableBody.appendChild(row);
