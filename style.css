@@ -1,0 +1,53 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.crypto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.crypto img {
+  width: 30px;
+  height: 30px;
+  margin-right: 12px;
+}
+
+.crypto-name {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.price {
+  margin-left: auto;
+  text-align: right;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
