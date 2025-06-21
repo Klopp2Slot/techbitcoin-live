@@ -1,11 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Live Crypto Tracker</title>
+  <title>TechBitcoin – Live Crypto Prices & Charts</title>
+  <meta name="description" content="Track live cryptocurrency prices, charts, and market data on TechBitcoin. View price changes, market cap, volume, and coin-specific analytics.">
+  <meta name="keywords" content="crypto, bitcoin, ethereum, prices, charts, techbitcoin, coin tracker, live crypto">
+  <meta property="og:title" content="TechBitcoin – Live Crypto Prices & Charts" />
+  <meta property="og:description" content="Track live cryptocurrency prices and explore individual coin charts and stats on TechBitcoin." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://techbitcoin.com/" />
+  <meta property="og:image" content="https://techbitcoin.com/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@techbitcoinben" />
   <link rel="stylesheet" href="style.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
 </head>
 <body>
   <div class="container">
@@ -32,6 +47,10 @@
       <button onclick="changePage(1)">Next</button>
     </div>
   </div>
+  <footer class="social-bar">
+    <a href="https://twitter.com/techbitcoinben" target="_blank">Twitter</a> |
+    <a href="https://instagram.com/techbitcoinben" target="_blank">Instagram</a>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>

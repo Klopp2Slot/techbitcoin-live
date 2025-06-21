@@ -17,7 +17,10 @@ async function loadCoinDetails() {
     <p><strong>All-Time High:</strong> $${data.market_data.ath.usd} on ${new Date(data.market_data.ath_date.usd).toLocaleDateString()}</p>
   `;
 
-  loadChart('7'); // default to 7d
+  loadChart('7');
+  document.getElementById("buy-link").innerHTML = `
+    <a href='https://www.binance.com/en/trade/${data.symbol.toUpperCase()}_USDT?ref=your-ref-code' target='_blank' style='color:green;font-weight:bold;'>Buy ${data.name} on Binance →</a>
+  `;
 }
 
 async function loadChart(days) {
@@ -28,7 +31,6 @@ async function loadChart(days) {
   const dataPoints = priceData.prices.map(p => p[1]);
 
   const ctx = document.getElementById("chart").getContext("2d");
-
   if (chart) chart.destroy();
 
   chart = new Chart(ctx, {

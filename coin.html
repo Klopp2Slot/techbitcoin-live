@@ -1,11 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Coin Details</title>
+  <title>Coin Details – TechBitcoin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Explore coin price history, all-time highs, market cap, volume, and charts. Powered by TechBitcoin and CoinGecko API.">
+  <meta name="keywords" content="crypto, bitcoin, ethereum, prices, coin details, techbitcoin, crypto chart">
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Coin Price & Stats – TechBitcoin" />
+  <meta property="og:description" content="Full coin data including 1D/7D/30D/1Y charts, ATH, volume and more.">
+  <meta property="og:image" content="https://techbitcoin.com/logo.png" />
+  <meta property="og:url" content="https://techbitcoin.com/coin.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@techbitcoinben" />
   <link rel="stylesheet" href="style.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
 </head>
 <body>
   <div class="container">
@@ -21,7 +36,12 @@
       <button onclick="toggleTheme()">🌗 Toggle Theme</button>
     </div>
     <canvas id="chart" width="600" height="300"></canvas>
+    <div id="buy-link" style="margin-top: 15px;"></div>
   </div>
+  <footer class="social-bar">
+    <a href="https://twitter.com/techbitcoinben" target="_blank">Twitter</a> |
+    <a href="https://instagram.com/techbitcoinben" target="_blank">Instagram</a>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="coin.js"></script>
 </body>
