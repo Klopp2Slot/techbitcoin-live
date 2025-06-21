@@ -1,6 +1,7 @@
 
 const params = new URLSearchParams(window.location.search);
 const coinId = params.get("id");
+let chart;
 
 async function loadCoinDetails() {
   const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`);
@@ -16,19 +17,26 @@ async function loadCoinDetails() {
     <p><strong>All-Time High:</strong> $${data.market_data.ath.usd} on ${new Date(data.market_data.ath_date.usd).toLocaleDateString()}</p>
   `;
 
-  const prices = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`);
-  const priceData = await prices.json();
+  loadChart('7'); // default to 7d
+}
+
+async function loadChart(days) {
+  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`);
+  const priceData = await res.json();
 
   const labels = priceData.prices.map(p => new Date(p[0]).toLocaleDateString());
   const dataPoints = priceData.prices.map(p => p[1]);
 
   const ctx = document.getElementById("chart").getContext("2d");
-  new Chart(ctx, {
+
+  if (chart) chart.destroy();
+
+  chart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
       datasets: [{
-        label: '7-Day Price (USD)',
+        label: `${days} Day Price (USD)`,
         data: dataPoints,
         borderColor: 'blue',
         backgroundColor: 'rgba(135,206,250,0.4)',
@@ -38,15 +46,14 @@ async function loadCoinDetails() {
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        x: { display: true },
-        y: { display: true }
-      }
+      plugins: { legend: { display: false } },
+      scales: { x: { display: true }, y: { display: true } }
     }
   });
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
 }
 
 loadCoinDetails();

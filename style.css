@@ -59,3 +59,16 @@ img {
   margin: 0 10px;
   cursor: pointer;
 }
+
+.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.dark-mode .container {
+  background-color: #1e1e1e;
+}
+
+button {
+  margin: 5px;
+}
