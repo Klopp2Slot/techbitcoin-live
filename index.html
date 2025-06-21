@@ -10,7 +10,24 @@
 <body>
   <div class="container">
     <h1>Live Crypto Tracker</h1>
-    <div id="crypto-container"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Coin</th>
+          <th>Price</th>
+          <th>1h %</th>
+          <th>24h %</th>
+          <th>7d %</th>
+        </tr>
+      </thead>
+      <tbody id="crypto-table"></tbody>
+    </table>
+    <div class="pagination">
+      <button onclick="changePage(-1)">Previous</button>
+      <span id="page-number">Page 1</span>
+      <button onclick="changePage(1)">Next</button>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>

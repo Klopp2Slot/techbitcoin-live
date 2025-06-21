@@ -1,36 +1,42 @@
 
-const container = document.getElementById("crypto-container");
+let currentPage = 1;
+const perPage = 20;
 
-async function fetchCryptoData() {
+async function fetchCryptoData(page = 1) {
   const response = await fetch(
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,litecoin,dogecoin,solana,cardano&order=market_cap_desc"
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h,24h,7d`
   );
   const data = await response.json();
 
-  container.innerHTML = "";
+  const tableBody = document.getElementById("crypto-table");
+  tableBody.innerHTML = "";
+  document.getElementById("page-number").innerText = "Page " + currentPage;
 
-  data.forEach((coin) => {
-    const coinDiv = document.createElement("div");
-    coinDiv.className = "crypto";
+  data.forEach((coin, index) => {
+    const row = document.createElement("tr");
 
-    const priceClass = coin.price_change_percentage_24h >= 0 ? "green" : "red";
+    const formatChange = (value) => {
+      const cls = value >= 0 ? "green" : "red";
+      return `<span class="\${cls}">\${value?.toFixed(2) ?? "N/A"}%</span>`;
+    };
 
-    coinDiv.innerHTML = `
-      <div class="crypto-name">
-        <img src="${coin.image}" alt="${coin.name}" />
-        ${coin.name} (${coin.symbol.toUpperCase()})
-      </div>
-      <div class="price">
-        $${coin.current_price.toLocaleString()}<br>
-        <span class="${priceClass}">
-          ${coin.price_change_percentage_24h.toFixed(2)}%
-        </span>
-      </div>
+    row.innerHTML = `
+      <td>\${(page - 1) * perPage + index + 1}</td>
+      <td><img src="\${coin.image}" alt="\${coin.name}" /> \${coin.name} (\${coin.symbol.toUpperCase()})</td>
+      <td>\$ \${coin.current_price.toLocaleString()}</td>
+      <td>\${formatChange(coin.price_change_percentage_1h_in_currency)}</td>
+      <td>\${formatChange(coin.price_change_percentage_24h_in_currency)}</td>
+      <td>\${formatChange(coin.price_change_percentage_7d_in_currency)}</td>
     `;
 
-    container.appendChild(coinDiv);
+    tableBody.appendChild(row);
   });
 }
 
-fetchCryptoData();
-setInterval(fetchCryptoData, 60000); // Refresh every 60s
+function changePage(direction) {
+  currentPage += direction;
+  if (currentPage < 1) currentPage = 1;
+  fetchCryptoData(currentPage);
+}
+
+fetchCryptoData(currentPage);
