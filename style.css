@@ -1,1 +1,44 @@
-body { font-family: sans-serif; background-color: #f4f4f4; color: #333; padding: 1em; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+h1 {
+  text-align: center;
+}
+.toggle-controls {
+  text-align: center;
+  margin-bottom: 15px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background: #eee;
+}
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+.footer {
+  margin-top: 20px;
+  text-align: center;
+}

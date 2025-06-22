@@ -1,1 +1,35 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>TechBitcoin</title></head><body><h1>Live Crypto Tracker</h1><a href='category.html?category=defi'>Browse Categories</a></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Crypto Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Live Crypto Tracker</h1>
+    <div class="toggle-controls">
+      <label for="view-toggle">View:</label>
+      <select id="view-toggle" onchange="switchView(this.value)">
+        <option value="market">Market Cap</option>
+        <option value="category">By Category</option>
+      </select>
+    </div>
+    <div id="crypto-table">
+      Loading coins...
+    </div>
+    <div class="pagination">
+      <button onclick="changePage(-1)">Previous</button>
+      <span id="page-number">Page 1</span>
+      <button onclick="changePage(1)">Next</button>
+    </div>
+    <div class="footer">
+      <a href="https://twitter.com/techbitcoinben" target="_blank">Twitter</a> |
+      <a href="https://instagram.com/techbitcoinben" target="_blank">Instagram</a>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
