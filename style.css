@@ -29,30 +29,9 @@ th, td {
 th {
   background-color: #f9f9f9;
 }
-img {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
 .green {
   color: green;
 }
 .red {
   color: red;
-}
-.pagination {
-  text-align: center;
-  margin-top: 20px;
-}
-.pagination button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-}
-.social-bar {
-  text-align: center;
-  padding: 10px;
-  background: #f4f4f4;
-  font-size: 14px;
 }
