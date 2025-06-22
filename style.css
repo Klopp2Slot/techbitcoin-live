@@ -29,9 +29,9 @@ th, td {
 th {
   background-color: #f9f9f9;
 }
-.green {
-  color: green;
-}
-.red {
-  color: red;
+img.coin-logo {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
