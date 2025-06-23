@@ -1,1 +1,1 @@
-// Main script logic for loading coin data
+console.log('Main script loaded');

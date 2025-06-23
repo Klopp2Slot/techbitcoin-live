@@ -1,1 +1,1 @@
-// Logic for categories view
+console.log('Categories script placeholder');

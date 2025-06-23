@@ -1,1 +1,1 @@
-// Coin-specific detail page script
+console.log('Coin detail logic will be here');
