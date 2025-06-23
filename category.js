@@ -1,1 +1,1 @@
-console.log("Category logic will load category-specific coin data.");
+document.getElementById('category-list').innerText = 'Coins by category will appear here.';
