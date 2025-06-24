@@ -1,12 +1,11 @@
-
-function toggleView(view) {
-  document.getElementById('content').innerHTML = '<p>Loading ' + view + ' data...</p>';
-  setTimeout(() => {
-    document.getElementById('content').innerHTML = 
-      '<table><tr><th>#</th><th>Coin</th><th>Price</th><th>24h</th></tr>' +
-      '<tr><td>1</td><td><a href="pages/coin.html">Bitcoin</a></td><td>$65,000</td><td class="green">+2.5%</td></tr>' +
-      '<tr><td>2</td><td><a href="pages/coin.html">Ethereum</a></td><td>$3,500</td><td class="red">-1.2%</td></tr>' +
-      '</table>';
-  }, 1000);
+async function toggleView(view) {
+  const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd');
+  const data = await response.json();
+  let html = '<table><tr><th>#</th><th>Coin</th><th>Price</th><th>24h</th></tr>';
+  data.forEach((coin, index) => {
+    html += `<tr><td>${index+1}</td><td><a href='pages/${coin.id}.html'>${coin.name}</a></td><td>$${coin.current_price}</td><td>${coin.price_change_percentage_24h.toFixed(2)}%</td></tr>`;
+  });
+  html += '</table>';
+  document.getElementById('coinTable').innerHTML = html;
 }
-window.onload = () => toggleView('market');
+toggleView('marketCap');
