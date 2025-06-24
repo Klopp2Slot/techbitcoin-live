@@ -1,1 +1,1 @@
-// Handles market cap & category view, chart loading, linking
+console.log('TechBitcoin loaded');
