@@ -1,1 +1,1 @@
-document.getElementById('crypto-list').innerText = 'Live crypto prices will appear here.';
+// Handles market cap & category view, chart loading, linking

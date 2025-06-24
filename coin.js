@@ -1,1 +1,1 @@
-document.getElementById('coin-info').innerText = 'Detailed coin data will load here.';
+// Loads individual coin data, chart, and news
