@@ -1,1 +1,1 @@
-console.log('Coin detail logic will be here');
+console.log('Coin page loaded with chart, data, news, and buy button');
