@@ -1,1 +1,1 @@
-console.log('JS Loaded');
+// JavaScript to handle API and UI interactions
