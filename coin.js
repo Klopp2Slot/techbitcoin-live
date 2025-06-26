@@ -1,1 +1,1 @@
-// Loads individual coin data, chart, and news
+// Coin page JS logic

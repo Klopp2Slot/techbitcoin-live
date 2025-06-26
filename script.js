@@ -1,1 +1,1 @@
-// JavaScript to handle API and UI interactions
+// Main JS logic
