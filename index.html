@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechBitcoin Live Tracker</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
 </head>
 <body>
   <h1>Top 100 Cryptocurrencies</h1>
@@ -14,7 +39,10 @@
         <th>#</th>
         <th>Name</th>
         <th>Price</th>
+        <th>1h %</th>
         <th>24h %</th>
+        <th>7d %</th>
+        <th>24h Volume</th>
         <th>Market Cap</th>
       </tr>
     </thead>
@@ -23,7 +51,7 @@
 
   <script>
     async function loadCryptoData() {
-      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h,24h,7d';
       const response = await fetch(url);
       const data = await response.json();
 
@@ -36,9 +64,16 @@
           <td>${index + 1}</td>
           <td><img src="${coin.image}" width="20" style="vertical-align: middle;"/> ${coin.name} (${coin.symbol.toUpperCase()})</td>
           <td>$${coin.current_price.toLocaleString()}</td>
-          <td style="color:${coin.price_change_percentage_24h >= 0 ? 'green' : 'red'};">
-            ${coin.price_change_percentage_24h.toFixed(2)}%
+          <td style="color:${coin.price_change_percentage_1h_in_currency >= 0 ? 'green' : 'red'};">
+            ${coin.price_change_percentage_1h_in_currency?.toFixed(2)}%
           </td>
+          <td style="color:${coin.price_change_percentage_24h_in_currency >= 0 ? 'green' : 'red'};">
+            ${coin.price_change_percentage_24h_in_currency?.toFixed(2)}%
+          </td>
+          <td style="color:${coin.price_change_percentage_7d_in_currency >= 0 ? 'green' : 'red'};">
+            ${coin.price_change_percentage_7d_in_currency?.toFixed(2)}%
+          </td>
+          <td>$${coin.total_volume.toLocaleString()}</td>
           <td>$${coin.market_cap.toLocaleString()}</td>
         `;
         tbody.appendChild(row);
