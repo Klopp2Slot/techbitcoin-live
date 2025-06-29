@@ -1,1 +1,1 @@
-// Coin page JS logic
+console.log('Coin page script');
