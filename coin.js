@@ -1,1 +1,1 @@
-console.log('Coin page script');
+<!-- coin.js content -->

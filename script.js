@@ -1,1 +1,1 @@
-console.log('TechBitcoin loaded');
+<!-- script.js content -->
