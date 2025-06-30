@@ -1,21 +1,5 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
-  background: #fff;
-}
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.9rem;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f4f4f4;
-}
+body { font-family: Arial, sans-serif; padding: 20px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+img { vertical-align: middle; }
