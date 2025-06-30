@@ -1,5 +1,1 @@
-
-body { font-family: Arial, sans-serif; padding: 20px; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
-img { vertical-align: middle; }
+body { font-family: Arial; padding: 20px; } table { width: 100%; border-collapse: collapse; } td, th { padding: 8px; border: 1px solid #ccc; }

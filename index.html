@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechBitcoin Live Tracker</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -25,6 +24,33 @@
     </thead>
     <tbody></tbody>
   </table>
-  <script src="script.js"></script>
+  <script>
+    async function loadCryptoData() {
+      const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=1h,24h,7d';
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const tbody = document.querySelector('#crypto-table tbody');
+      tbody.innerHTML = '';
+
+      data.forEach((coin, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = \`
+          <td>\${index + 1}</td>
+          <td><img src="\${coin.image}" width="20" style="vertical-align: middle;"/> <a href="coin.html?id=\${coin.id}">\${coin.name} (\${coin.symbol.toUpperCase()})</a></td>
+          <td>$\${coin.current_price.toLocaleString()}</td>
+          <td>\${coin.price_change_percentage_1h_in_currency?.toFixed(2)}%</td>
+          <td>\${coin.price_change_percentage_24h?.toFixed(2)}%</td>
+          <td>\${coin.price_change_percentage_7d_in_currency?.toFixed(2)}%</td>
+          <td>$\${coin.market_cap.toLocaleString()}</td>
+          <td>$\${coin.total_volume.toLocaleString()}</td>
+          <td><img src="\${coin.sparkline_in_7d?.price ? 'https://quickchart.io/chart?c={type:\'sparkline\',data:{datasets:[{data:[' + coin.sparkline_in_7d.price.slice(-24).join(',') + ']}]}}' : ''}" width="100"/></td>
+        \`;
+        tbody.appendChild(row);
+      });
+    }
+
+    loadCryptoData();
+  </script>
 </body>
 </html>
