@@ -53,9 +53,28 @@ function showPage(page) {
       </td>
       <td>$${coin.market_cap.toLocaleString()}</td>
       <td>$${coin.total_volume.toLocaleString()}</td>
-      <td><img src="https://www.coingecko.com/coins/${coin.id}/sparkline.svg" alt="sparkline" width="100"></td>
+      <td><canvas id="sparkline-${coin.id}" width="100" height="30"></canvas></td>
     `;
     tbody.appendChild(row);
+
+    const ctx = document.getElementById(`sparkline-${coin.id}`).getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array(coin.sparkline_in_7d.price.length).fill(''),
+        datasets: [{
+          data: coin.sparkline_in_7d.price,
+          borderColor: 'blue',
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false }},
+        elements: { point: { radius: 0 }},
+        scales: { x: { display: false }, y: { display: false }}
+      }
+    });
   });
 }
 
