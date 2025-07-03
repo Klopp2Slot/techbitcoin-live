@@ -5,17 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coin Detail</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <h1 id="coin-name">Loading...</h1>
 <div id="coin-data"></div>
+<canvas id="coinChart"></canvas>
+
+<div id="social-links"></div>
+
 <div id="news">
   <h2>Latest News</h2>
-  <p>(News section placeholder — add RSS or news API here.)</p>
+  <div id="news-articles"></div>
 </div>
+
 <script>
 const params = new URLSearchParams(window.location.search);
 const coinId = params.get('id');
+const NEWS_API_KEY = 'YOUR_API_KEY_HERE';
 
 fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`)
   .then(res => res.json())
@@ -27,8 +34,51 @@ fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`)
       <p>24h Volume: $${data.market_data.total_volume.usd.toLocaleString()}</p>
       <p>All-Time High: $${data.market_data.ath.usd} (${data.market_data.ath_date.usd.slice(0,10)})</p>
       <p>Rank: ${data.market_cap_rank}</p>
-      <img src="${data.image.large}" alt="${data.name}">
+      <img src="${data.image.large}" alt="${data.name}" style="max-width:100px;">
     `;
+
+    document.getElementById('social-links').innerHTML = `
+      <h3>Links</h3>
+      <p><a href="${data.links.homepage[0]}" target="_blank">Homepage</a></p>
+      ${data.links.twitter_screen_name ? `<p><a href="https://twitter.com/${data.links.twitter_screen_name}" target="_blank">Twitter</a></p>` : ''}
+      ${data.links.subreddit_url ? `<p><a href="${data.links.subreddit_url}" target="_blank">Reddit</a></p>` : ''}
+      ${data.links.repos_url.github[0] ? `<p><a href="${data.links.repos_url.github[0]}" target="_blank">GitHub</a></p>` : ''}
+    `;
+
+    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=30`)
+      .then(res => res.json())
+      .then(chartData => {
+        const ctx = document.getElementById('coinChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: chartData.prices.map(p => new Date(p[0]).toLocaleDateString()),
+            datasets: [{
+              label: `${data.name} Price`,
+              data: chartData.prices.map(p => p[1]),
+              borderColor: 'blue',
+              fill: false
+            }]
+          }
+        });
+      });
+
+    fetch(`https://newsapi.org/v2/everything?q=${data.name}&apiKey=${cda3d97dd9af45f3ad0f27025232fb94}`)
+      .then(res => res.json())
+      .then(news => {
+        const newsContainer = document.getElementById('news-articles');
+        news.articles.slice(0,2).forEach(article => {
+          const div = document.createElement('div');
+          div.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+          newsContainer.appendChild(div);
+        });
+        if (news.articles.length === 0) {
+          newsContainer.textContent = 'No news found.';
+        }
+      })
+      .catch(() => {
+        document.getElementById('news-articles').textContent = 'News API error or quota exceeded.';
+      });
   });
 </script>
 </body>
